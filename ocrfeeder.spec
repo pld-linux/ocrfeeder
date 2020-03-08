@@ -1,41 +1,47 @@
 Summary:	OCRFeeder - document layout analysis and optical character recognition system
 Summary(pl.UTF-8):	OCRFeeder - system analizy układu dokumentu i optycznego rozpoznawania znaków
 Name:		ocrfeeder
-Version:	0.8.1
+Version:	0.8.2
 Release:	1
 License:	GPL v3+
 Group:		Applications/Graphics
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/ocrfeeder/0.8/%{name}-%{version}.tar.xz
-# Source0-md5:	defa1fc1034e637f48fbc37a4809296a
-URL:		https://wiki.gnome.org/OCRFeeder
+# Source0-md5:	d308158ecaa1d88c6850d96b23430743
+Patch0:		%{name}-missing.patch
+URL:		https://wiki.gnome.org/Apps/OCRFeeder
+BuildRequires:	autoconf >= 2.63
+BuildRequires:	automake >= 1:1.11
 BuildRequires:	gettext-tools
-BuildRequires:	gnome-doc-utils
+# for AM_GLIB_GNU_GETTEXT
+BuildRequires:	glib2-devel >= 2.0
 # Gtk, GooCanvas gobject bindings
 BuildRequires:	goocanvas2
 # Gtk gobject binding
 BuildRequires:	gtk+3
 BuildRequires:	intltool >= 0.35.0
-# sane, reportlab
-BuildRequires:	python-PIL
-BuildRequires:	python-ReportLab
-BuildRequires:	python-pyenchant
-# note: checks for pygobject, but uses pygobject3
-BuildRequires:	python-pygobject
-BuildRequires:	python-pysane
-BuildRequires:	python-modules >= 1:2.5
+BuildRequires:	python3 >= 1:3.5
+BuildRequires:	python3-ReportLab
+BuildRequires:	python3-odfpy
+BuildRequires:	python3-pillow
+BuildRequires:	python3-pyenchant
+BuildRequires:	python3-pygobject3
+BuildRequires:	python3-sane
+BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.507
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
+BuildRequires:	yelp-tools
 Requires:	goocanvas2
 Requires:	gtk+3
-Requires:	python-PIL
-Requires:	python-ReportLab
-Requires:	python-modules >= 1:2.5
-Requires:	python-pyenchant
-Requires:	python-pygobject3
-Requires:	python-pysane
+Requires:	python3-ReportLab
+Requires:	python3-modules >= 1:3.5
+Requires:	python3-odfpy
+Requires:	python3-pillow
+Requires:	python3-pyenchant
+Requires:	python3-pygobject3
+Requires:	python3-sane
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -71,10 +77,16 @@ informatyki Joaquima Rocha.
 
 %prep
 %setup -q
+%patch0 -p1
 
-%{__sed} -i -e '1s,/usr/bin/env python,/usr/bin/python,' bin/ocrfeeder.in bin/ocrfeeder-cli.in
+%{__sed} -i -e '1s,/usr/bin/env python3,%{__python3},' bin/ocrfeeder.in bin/ocrfeeder-cli.in
 
 %build
+# rebuild am to get PLD version of python.m4
+%{__intltoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__automake}
 %configure \
 	--disable-silent-rules
 %{__make}
@@ -84,8 +96,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-%py_postclean
 
 %find_lang %{name} --with-gnome
 
@@ -97,8 +107,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README TRANSLATORS
 %attr(755,root,root) %{_bindir}/ocrfeeder
 %attr(755,root,root) %{_bindir}/ocrfeeder-cli
-%{py_sitescriptdir}/ocrfeeder
+%{py3_sitescriptdir}/ocrfeeder
 %{_datadir}/ocrfeeder
-%{_desktopdir}/ocrfeeder.desktop
+%{_datadir}/metainfo/org.gnome.OCRFeeder.appdata.xml
+%{_desktopdir}/org.gnome.OCRFeeder.desktop
+%{_iconsdir}/hicolor/scalable/apps/org.gnome.OCRFeeder.svg
 %{_mandir}/man1/ocrfeeder.1*
 %{_mandir}/man1/ocrfeeder-cli.1*
