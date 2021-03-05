@@ -41,6 +41,7 @@ Requires:	python3-pillow
 Requires:	python3-pyenchant
 Requires:	python3-pygobject3
 Requires:	python3-sane
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
