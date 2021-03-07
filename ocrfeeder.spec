@@ -33,6 +33,7 @@ BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	yelp-tools
+BuildConflicts:	gtk4
 Requires:	goocanvas2
 Requires:	gtk+3
 Requires:	python3-ReportLab
