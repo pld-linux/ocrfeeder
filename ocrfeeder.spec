@@ -17,6 +17,7 @@ BuildRequires:	glib2-devel >= 2.0
 BuildRequires:	goocanvas2
 # Gtk gobject binding
 BuildRequires:	gtk+3
+BuildRequires:	gobject-introspection
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	python3 >= 1:3.5
 BuildRequires:	python3-ReportLab
