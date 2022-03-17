@@ -1,12 +1,12 @@
 Summary:	OCRFeeder - document layout analysis and optical character recognition system
 Summary(pl.UTF-8):	OCRFeeder - system analizy układu dokumentu i optycznego rozpoznawania znaków
 Name:		ocrfeeder
-Version:	0.8.3
-Release:	3
+Version:	0.8.5
+Release:	1
 License:	GPL v3+
 Group:		Applications/Graphics
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/ocrfeeder/0.8/%{name}-%{version}.tar.xz
-# Source0-md5:	ce53ecf155dc902c1855827646e567bd
+Source0:	https://download.gnome.org/sources/ocrfeeder/0.8/%{name}-%{version}.tar.xz
+# Source0-md5:	908c68946d53cd1b864e53af1fe4de0d
 URL:		https://wiki.gnome.org/Apps/OCRFeeder
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
