@@ -20,11 +20,11 @@ BuildRequires:	gtk+3
 BuildRequires:	gobject-introspection
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	python3 >= 1:3.5
-BuildRequires:	python3-ReportLab
 BuildRequires:	python3-odfpy
 BuildRequires:	python3-pillow
 BuildRequires:	python3-pyenchant
 BuildRequires:	python3-pygobject3
+BuildRequires:	python3-reportlab
 BuildRequires:	python3-sane
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	rpm-pythonprov
@@ -36,12 +36,12 @@ BuildRequires:	yelp-tools
 BuildConflicts:	gtk4
 Requires:	goocanvas2
 Requires:	gtk+3
-Requires:	python3-ReportLab
 Requires:	python3-modules >= 1:3.5
 Requires:	python3-odfpy
 Requires:	python3-pillow
 Requires:	python3-pyenchant
 Requires:	python3-pygobject3
+Requires:	python3-reportlab
 Requires:	python3-sane
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
