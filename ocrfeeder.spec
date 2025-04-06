@@ -2,13 +2,14 @@ Summary:	OCRFeeder - document layout analysis and optical character recognition 
 Summary(pl.UTF-8):	OCRFeeder - system analizy układu dokumentu i optycznego rozpoznawania znaków
 Name:		ocrfeeder
 Version:	0.8.5
-Release:	5
+Release:	6
 License:	GPL v3+
 Group:		Applications/Graphics
 Source0:	https://download.gnome.org/sources/ocrfeeder/0.8/%{name}-%{version}.tar.xz
 # Source0-md5:	908c68946d53cd1b864e53af1fe4de0d
 URL:		https://wiki.gnome.org/Apps/OCRFeeder
 BuildRequires:	autoconf >= 2.63
+BuildRequires:	autoconf-archive >= 2015.05.06
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	gettext-tools
 # for AM_GLIB_GNU_GETTEXT
@@ -33,7 +34,6 @@ BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	yelp-tools
-BuildConflicts:	gtk4
 Requires:	goocanvas2
 Requires:	gtk+3
 Requires:	python3-modules >= 1:3.5
@@ -81,6 +81,9 @@ informatyki Joaquima Rocha.
 %setup -q
 
 %{__sed} -i -e '1s,/usr/bin/env python3,%{__python3},' bin/ocrfeeder.in bin/ocrfeeder-cli.in
+
+# use newer version from autoconf-archive; upstream one uses imp module, which is gone in 3.12
+%{__rm} m4/m4_ax_python_module.m4
 
 %build
 # rebuild am to get PLD version of python.m4
